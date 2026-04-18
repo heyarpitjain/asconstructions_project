@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 
-// ===== IMPORT IMAGES =====
+// ===== IMPORT IMAGES (MAKE SURE CASE MATCHES EXACTLY) =====
 
 // Bhopal
 import p1 from "../assets/projects/Bhopal/p1.jpg";
@@ -60,29 +60,28 @@ const Projects = () => {
   const [selected, setSelected] = useState(null);
 
   return (
-    <section id="projects" className="py-24 bg-white">
-      
+    <section id="projects" className="py-20 bg-white">
+
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Heading */}
-        <h2 className="text-4xl font-bold text-center mb-16">
+        <h2 className="text-4xl font-bold text-center mb-12">
           Our Projects
         </h2>
 
-        {/* 🔥 SWIPER (AUTO HEIGHT ENABLED) */}
+        {/* SWIPER */}
         <Swiper
           modules={[Navigation]}
           navigation
           spaceBetween={30}
-          autoHeight={true}   // ⭐ FIX
+          autoHeight
         >
           {imageGroups.map((images, groupIndex) => (
             <SwiperSlide key={groupIndex}>
 
-              {/* 🔥 ADAPTIVE GRID */}
               <div
                 className={`
-                  grid gap-6 auto-rows-[minmax(150px,auto)]
+                  grid gap-6 auto-rows-[minmax(140px,auto)]
                   ${
                     images.length <= 2
                       ? "grid-cols-1 sm:grid-cols-2 justify-center"
@@ -98,24 +97,20 @@ const Projects = () => {
                     className={`relative overflow-hidden rounded-xl cursor-pointer ${
                       images.length > 4 && i % 3 === 0 ? "row-span-2" : ""
                     }`}
-                    initial={{ opacity: 0, scale: 0.9 }}
+                    initial={{ opacity: 0, scale: 0.95 }}
                     whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                    transition={{ duration: 0.4, delay: i * 0.08 }}
                     viewport={{ once: true }}
                     onClick={() => setSelected(img)}
                   >
-
-                    {/* Image */}
                     <img
                       src={img}
                       loading="lazy"
-                      alt="project"
-                      className="w-full h-full object-cover transition duration-500 hover:scale-110"
+                      alt={`Project ${groupIndex + 1} image ${i + 1}`} // ✅ FIXED
+                      className="w-full h-full object-cover transition duration-500 hover:scale-105"
                     />
 
-                    {/* Overlay */}
                     <div className="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition"></div>
-
                   </motion.div>
                 ))}
               </div>
@@ -126,7 +121,7 @@ const Projects = () => {
 
       </div>
 
-      {/* 🔥 MODAL */}
+      {/* MODAL */}
       <AnimatePresence>
         {selected && (
           <motion.div
@@ -138,10 +133,12 @@ const Projects = () => {
           >
             <motion.img
               src={selected}
+              alt="Selected project"
               className="max-w-[90%] max-h-[90%] rounded-lg shadow-lg"
-              initial={{ scale: 0.8 }}
+              initial={{ scale: 0.85 }}
               animate={{ scale: 1 }}
-              exit={{ scale: 0.8 }}
+              exit={{ scale: 0.85 }}
+              onClick={(e) => e.stopPropagation()} // ✅ FIXED (prevents accidental close)
             />
           </motion.div>
         )}

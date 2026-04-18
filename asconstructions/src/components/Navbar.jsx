@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import logo from "../assets/logo/logo.png";
+import logo from "../assets/logo/logo.png"; // ✅ FIXED
 
 const sections = [
   "home",
@@ -23,12 +23,10 @@ const Navbar = () => {
 
       setScrolled(scrollY > 40);
 
-      // 🔥 scroll progress
       const totalHeight =
         document.documentElement.scrollHeight - window.innerHeight;
       setProgress((scrollY / totalHeight) * 100);
 
-      // 🔥 active section detection
       sections.forEach((sec) => {
         const el = document.getElementById(sec);
         if (el) {
@@ -48,9 +46,9 @@ const Navbar = () => {
 
   return (
     <>
-      {/* 🔥 TOP PROGRESS BAR */}
+      {/* 🔥 PROGRESS BAR */}
       <div
-        className="fixed top-0 left-0 h-0.75 bg-yellow-500 z-60 transition-all duration-200"
+        className="fixed top-0 left-0 h-[3px] bg-yellow-500 z-[60] transition-all duration-200"
         style={{ width: `${progress}%` }}
       />
 
@@ -63,7 +61,7 @@ const Navbar = () => {
       >
         <div className="max-w-7xl mx-auto flex justify-between items-center px-6">
 
-          {/* 🔥 LOGO */}
+          {/* LOGO */}
           <a href="#home" className="flex items-center gap-3">
             <img src={logo} alt="AS Constructions" className="h-10" />
             <span
@@ -75,7 +73,7 @@ const Navbar = () => {
             </span>
           </a>
 
-          {/* 🔥 DESKTOP NAV */}
+          {/* DESKTOP NAV */}
           <ul
             className={`hidden md:flex gap-8 text-sm font-medium ${
               scrolled ? "text-gray-700" : "text-white"
@@ -93,9 +91,8 @@ const Navbar = () => {
                 >
                   {item.charAt(0).toUpperCase() + item.slice(1)}
 
-                  {/* 🔥 active underline */}
                   <span
-                    className={`absolute left-0 -bottom-1 h-0.5 bg-yellow-500 transition-all duration-300 ${
+                    className={`absolute left-0 -bottom-1 h-[2px] bg-yellow-500 transition-all duration-300 ${
                       active === item ? "w-full" : "w-0"
                     }`}
                   />
@@ -104,37 +101,36 @@ const Navbar = () => {
             ))}
           </ul>
 
-          {/* 🔥 MOBILE BUTTON */}
+          {/* MOBILE BUTTON */}
           <button
             className="md:hidden flex flex-col gap-1 z-50"
             onClick={() => setOpen(!open)}
           >
             <span
-              className={`w-6 h-0.5 transition ${
-                open ? "rotate-45 translate-y-1.5" : ""
+              className={`w-6 h-[2px] transition ${
+                open ? "rotate-45 translate-y-[6px]" : ""
               } ${scrolled || open ? "bg-black" : "bg-white"}`}
             />
             <span
-              className={`w-6 h-0.5 transition ${
+              className={`w-6 h-[2px] transition ${
                 open ? "opacity-0" : ""
               } ${scrolled || open ? "bg-black" : "bg-white"}`}
             />
             <span
-              className={`w-6 h-0.5 transition ${
-                open ? "-rotate-45 -translate-y-1.5" : ""
+              className={`w-6 h-[2px] transition ${
+                open ? "-rotate-45 -translate-y-[6px]" : ""
               } ${scrolled || open ? "bg-black" : "bg-white"}`}
             />
           </button>
         </div>
 
-        {/* 🔥 MOBILE MENU */}
+        {/* MOBILE MENU */}
         <div
           className={`md:hidden fixed top-0 left-0 w-full h-screen bg-white transition-all duration-300 ${
             open ? "opacity-100 visible" : "opacity-0 invisible"
           }`}
         >
           <ul className="flex flex-col items-center justify-center h-full gap-8 text-xl font-medium text-gray-800">
-
             {sections.map((item) => (
               <li key={item}>
                 <a
@@ -150,7 +146,6 @@ const Navbar = () => {
                 </a>
               </li>
             ))}
-
           </ul>
         </div>
       </nav>
