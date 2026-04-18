@@ -60,7 +60,8 @@ const Clients = () => {
                 src={logo}
                 loading="lazy"
                 alt={`Client ${i + 1} logo`}  // ✅ SEO improvement
-                className="h-12 md:h-14 object-contain grayscale group-hover:grayscale-0 transition duration-300 group-hover:scale-105"
+                // className="h-12 md:h-14 object-contain grayscale group-hover:grayscale-0 transition duration-300 group-hover:scale-105"
+                className="h-12 md:h-14 object-contain transition duration-300 group-hover:scale-105"
               />
             </motion.div>
           ))}
